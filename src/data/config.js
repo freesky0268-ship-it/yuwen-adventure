@@ -24,9 +24,7 @@ window.GRADE_OPTIONS = [
   {id:'6_1',label:'六年级上册'},{id:'6_2',label:'六年级下册'},
 ];
 window.TEXTBOOK_OPTIONS = [
-  {id:'renj',label:'人教版'},
-  {id:'beishida',label:'北师大版'},
-  {id:'sujiao',label:'苏教版'}
+  {id:'renj',label:'人教版'}
 ];
 window.QUESTION_BANKS = {'3_2_renj': QUESTIONS_3_2};
 window.LEVEL_BANKS = {'3_2_renj': LEVELS_3_2};
