@@ -1,0 +1,71 @@
+/* 答题页 */
+#quiz-screen{background:linear-gradient(180deg,#1A1A2E,#16213E);padding:20px;gap:16px;justify-content:flex-start;}
+.quiz-header{width:100%;max-width:600px;display:flex;justify-content:space-between;align-items:center;}
+.quiz-progress{display:flex;gap:6px;}
+.quiz-dot{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .3s;}
+.quiz-dot.done{background:#00E676;}
+.quiz-dot.current{background:#FFD700;animation:pulse .8s infinite;}
+.quiz-dot.wrong{background:#FF4757;}
+.quiz-level-name{font-weight:700;font-size:16px;color:#FFD700;}
+.quiz-card{width:100%;max-width:600px;background:rgba(255,255,255,.07);border-radius:20px;padding:28px 24px;box-shadow:0 4px 25px rgba(0,0,0,.3);flex:1;display:flex;flex-direction:column;gap:16px;overflow-y:auto;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px);}
+.quiz-q-num{font-size:13px;color:#8892B0;font-weight:600;}
+.quiz-q-text{font-size:clamp(17px,3vw,22px);font-weight:700;color:#E8E8F0;line-height:1.6;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+.quiz-opt{padding:14px 18px;border-radius:14px;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);cursor:pointer;font-size:clamp(15px,2.5vw,18px);transition:all .2s;display:flex;align-items:center;gap:10px;min-height:48px;color:#E8E8F0;}
+.quiz-opt:hover:not(.disabled){border-color:#FFD700;background:rgba(255,215,0,.1);}
+.quiz-opt.selected{border-color:#FF6B35;background:rgba(255,107,53,.15);}
+.quiz-opt.correct{border-color:#00E676;background:rgba(0,230,118,.15);animation:correctFlash .5s;}
+.quiz-opt.wrong-answer{border-color:#FF4757;background:rgba(255,71,87,.15);}
+.quiz-opt.disabled{pointer-events:none;}
+.opt-label{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#8892B0;flex-shrink:0;}
+.quiz-opt.correct .opt-label{background:#00E676;color:#1A1A2E;}
+.quiz-opt.wrong-answer .opt-label{background:#FF4757;color:#fff;}
+@keyframes correctFlash{0%{transform:scale(1);}50%{transform:scale(1.03);}100%{transform:scale(1);}}
+.quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;line-height:1.6;display:none;}
+.quiz-feedback.show{display:block;animation:slideUp .3s;}
+.quiz-feedback.correct-fb{background:rgba(0,230,118,.15);color:#00E676;border:1px solid rgba(0,230,118,.3);}
+.quiz-feedback.wrong-fb{background:rgba(255,107,53,.15);color:#FF6B35;border:1px solid rgba(255,107,53,.3);}
+.quiz-next-btn{align-self:center;margin-top:auto;}
+.quiz-bonus{font-size:12px;color:#FFD700;text-align:center;margin-top:4px;}
+/* 关卡完成页 */
+#result-screen{background:linear-gradient(180deg,#1A1A2E,#16213E,#0F3460);justify-content:center;gap:16px;text-align:center;padding:20px;position:relative;}
+#result-screen::before{content:'';position:absolute;top:20%;left:50%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,215,0,.15),transparent 70%);transform:translateX(-50%);pointer-events:none;border-radius:50%;}
+.result-stars{font-size:clamp(40px,10vw,72px);letter-spacing:8px;position:relative;}
+.result-title{font-size:clamp(24px,5vw,40px);font-weight:900;color:#FFD700;position:relative;}
+.result-detail{font-size:18px;color:#00D4FF;position:relative;}
+.result-reward{background:rgba(255,215,0,.12);padding:16px 28px;border-radius:16px;font-size:16px;color:#E8E8F0;margin:8px 0;border:1px solid rgba(255,215,0,.3);position:relative;}
+.result-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;position:relative;}
+/* 战绩报告页 */
+#report-screen{background:linear-gradient(180deg,#1A1A2E,#0F3460);padding:20px;gap:16px;}
+#training-screen{background:linear-gradient(180deg,#1A1A2E,#0F3460);overflow-y:auto;}
+.report-title{font-size:clamp(22px,4vw,32px);font-weight:800;color:#00D4FF;}
+.report-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;width:100%;max-width:600px;}
+.report-card{background:rgba(255,255,255,.07);border-radius:16px;padding:16px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+.report-card-icon{font-size:32px;}
+.report-card-value{font-size:24px;font-weight:800;color:#00D4FF;margin:6px 0 2px;}
+.report-card-label{font-size:12px;color:#8892B0;}
+.report-section{width:100%;max-width:600px;background:rgba(255,255,255,.07);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+.report-section h3{font-size:16px;margin-bottom:12px;color:#00D4FF;}
+.report-bar-item{margin-bottom:10px;}
+.report-bar-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;}
+.report-bar{height:12px;background:rgba(0,212,255,.15);border-radius:6px;overflow:hidden;}
+.report-bar-fill{height:100%;border-radius:6px;transition:width 1s;background:linear-gradient(90deg,#00D4FF,#0F3460);}
+.report-encourage{width:100%;max-width:600px;background:rgba(255,255,255,.07);border-radius:16px;padding:20px;text-align:center;font-size:16px;color:#E8E8F0;line-height:1.8;white-space:pre-line;}
+/* 试卷上传页 */
+#upload-screen{background:linear-gradient(180deg,#1A1A2E,#16213E);padding:20px;gap:16px;}
+.upload-zone{width:100%;max-width:500px;border:3px dashed rgba(255,255,255,.2);border-radius:20px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .3s;background:rgba(255,255,255,.03);}
+.upload-zone:hover{border-color:#FF6B35;background:rgba(255,107,53,.05);}
+.upload-zone.dragging{border-color:#FFD700;background:rgba(255,215,0,.08);}
+.upload-icon{font-size:48px;margin-bottom:8px;}
+.upload-hint{font-size:14px;color:#8892B0;}
+.upload-preview{width:100%;max-width:500px;display:none;}
+.upload-preview img{width:100%;border-radius:12px;border:2px solid rgba(255,255,255,.1);}
+.wrong-type-grid{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:12px 0;}
+.wrong-type-card{padding:12px 20px;border-radius:14px;background:rgba(255,255,255,.06);cursor:pointer;border:2px solid transparent;transition:all .2s;text-align:center;min-width:100px;}
+.wrong-type-card:hover{border-color:#FF6B35;}
+.wrong-type-card.selected{border-color:#FF6B35;background:rgba(255,107,53,.15);}
+.wrong-type-card .wt-emoji{font-size:28px;}
+.wrong-type-card .wt-label{font-size:13px;color:#E8E8F0;margin-top:4px;}
+.wrong-type-count{display:flex;align-items:center;gap:8px;margin-top:6px;justify-content:center;}
+.wrong-type-count button{width:28px;height:28px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#E8E8F0;font-size:16px;cursor:pointer;}
+.wrong-type-count span{font-size:14px;color:#FFD700;font-weight:700;min-width:20px;text-align:center;}

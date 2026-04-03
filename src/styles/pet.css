@@ -1,0 +1,50 @@
+/* 伙伴基地 */
+#pet-screen{background:linear-gradient(180deg,#16213E,#1A1A2E,#0F3460);padding:20px;gap:12px;}
+.pet-house-title{font-size:clamp(22px,4vw,32px);font-weight:800;color:#FFD700;}
+.pet-display{background:rgba(255,255,255,.08);border-radius:24px;padding:24px;text-align:center;width:100%;max-width:400px;box-shadow:0 4px 20px rgba(0,0,0,.3);position:relative;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px);}
+.pet-avatar{font-size:clamp(80px,18vw,120px);line-height:1;cursor:pointer;transition:transform .3s;display:inline-block;}
+.pet-avatar:hover{transform:scale(1.1);}
+.pet-avatar.happy{animation:petBounce 1s infinite;}
+.pet-avatar.hungry{animation:petSad 2s infinite;}
+.pet-avatar.sad{animation:petShake 1.5s infinite;}
+@keyframes petBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+@keyframes petSad{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(4px) rotate(-3deg);}}
+@keyframes petShake{0%,100%{transform:rotate(0);}25%{transform:rotate(-3deg);}75%{transform:rotate(3deg);}}
+.pet-name-display{font-size:22px;font-weight:700;color:#00D4FF;margin:4px 0;}
+.pet-level-badge{display:inline-block;padding:4px 14px;border-radius:14px;font-size:13px;font-weight:700;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1A1A2E;}
+.pet-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;width:100%;max-width:400px;}
+.stat-card{background:rgba(255,255,255,.06);border-radius:14px;padding:12px;text-align:center;position:relative;cursor:help;}
+.stat-label{font-size:12px;color:#8892B0;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:4px;}
+.stat-info{font-size:11px;opacity:.6;}
+.stat-bar{height:8px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;margin:4px 0;}
+.stat-fill{height:100%;border-radius:4px;transition:width .5s;}
+.stat-fill.hunger{background:linear-gradient(90deg,#FF6B35,#FF4500);}
+.stat-fill.mood{background:linear-gradient(90deg,#00D4FF,#0099CC);}
+.stat-fill.growth{background:linear-gradient(90deg,#FFD700,#FFA500);}
+.stat-fill.intimacy{background:linear-gradient(90deg,#00E676,#00C853);}
+.stat-value{font-size:14px;font-weight:700;color:#E8E8F0;}
+.stat-tooltip{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:rgba(13,13,26,.97);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 14px;font-size:12px;color:#8892B0;width:240px;z-index:50;display:none;line-height:1.7;box-shadow:0 4px 20px rgba(0,0,0,.5);text-align:left;cursor:default;margin-bottom:6px;}
+.stat-tooltip strong{color:#FFD700;}
+.stat-card:hover .stat-tooltip{display:block;}
+.pet-action-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px;}
+.pet-deco-list{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px;font-size:28px;}
+.pet-speech{position:absolute;top:-10px;right:-10px;background:rgba(22,33,62,.95);border-radius:14px;padding:8px 14px;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.3);max-width:160px;display:none;animation:fadeInUp .3s;color:#E8E8F0;border:1px solid rgba(255,255,255,.1);}
+.pet-speech.show{display:block;}
+/* 补给站 */
+#shop-screen{background:linear-gradient(180deg,#1A1A2E,#16213E);padding:20px;gap:12px;}
+.shop-title{font-size:clamp(22px,4vw,32px);font-weight:800;color:#FFD700;}
+.shop-points{font-size:18px;color:#FFD700;font-weight:700;}
+.shop-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.shop-tab{padding:8px 20px;border-radius:14px;background:rgba(255,255,255,.08);cursor:pointer;font-weight:600;font-size:14px;transition:all .2s;border:2px solid transparent;color:#8892B0;}
+.shop-tab.active{background:#FF6B35;color:#fff;}
+.shop-tab:hover:not(.active){border-color:#FF6B35;color:#E8E8F0;}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;width:100%;max-width:600px;overflow-y:auto;flex:1;padding-bottom:20px;}
+.shop-item{background:rgba(255,255,255,.06);border-radius:16px;padding:14px;text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.2);transition:all .2s;border:2px solid rgba(255,255,255,.08);}
+.shop-item:hover:not(.cant-buy){transform:translateY(-4px);border-color:#FFD700;}
+.shop-item.cant-buy{opacity:.5;cursor:not-allowed;}
+.shop-item-emoji{font-size:36px;}
+.shop-item-name{font-size:14px;font-weight:700;margin:6px 0 2px;color:#E8E8F0;}
+.shop-item-price{font-size:13px;color:#FFD700;font-weight:600;}
+.shop-item-desc{font-size:11px;color:#8892B0;margin-top:2px;}
+.shop-item-lock{font-size:11px;color:#FF4757;margin-top:2px;}
+.shop-item-bonus{font-size:11px;color:#00E676;margin-top:2px;}

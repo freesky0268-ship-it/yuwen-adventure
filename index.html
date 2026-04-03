@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>语文学习大冒险 - 勇者征途</title>
+</head>
+<body>
+
+<!-- ===== 登录页 ===== -->
+<div id="login-screen" class="screen active">
+  <div class="welcome-deco">⚔️🛡️🌟</div>
+  <div class="welcome-title">语文学习大冒险</div>
+  <div class="welcome-subtitle">勇者征途 · 登录</div>
+  <div class="login-box">
+    <input type="text" id="login-user" class="login-input" placeholder="输入账号..." maxlength="12">
+    <input type="password" id="login-pass" class="login-input" placeholder="输入密码..." maxlength="20">
+    <div class="login-error" id="login-error"></div>
+    <button class="btn btn-primary" onclick="doLogin()">⚡ 登录</button>
+    <div class="login-link" onclick="showScreen('register')">还没有账号？点击注册</div>
+  </div>
+</div>
+
+<!-- ===== 注册页 ===== -->
+<div id="register-screen" class="screen">
+  <div class="welcome-deco">📝</div>
+  <div class="welcome-title" style="font-size:clamp(24px,5vw,36px);">注册新账号</div>
+  <div class="login-box">
+    <input type="text" id="reg-user" class="login-input" placeholder="设置账号名（2-12字符）" maxlength="12">
+    <input type="password" id="reg-pass" class="login-input" placeholder="设置密码（至少3位）" maxlength="20">
+    <input type="password" id="reg-pass2" class="login-input" placeholder="确认密码" maxlength="20">
+    <div class="login-error" id="reg-error"></div>
+    <button class="btn btn-primary" onclick="doRegister()">✅ 注册</button>
+    <div class="login-link" onclick="showScreen('login')">已有账号？返回登录</div>
+  </div>
+</div>
+
+<!-- ===== 欢迎页 ===== -->
+<div id="welcome-screen" class="screen">
+  <div class="user-bar">
+    <span id="user-name-display"></span>
+    <button class="btn btn-small btn-secondary" onclick="doLogout()" style="min-width:auto;padding:6px 14px;font-size:12px;">退出</button>
+  </div>
+  <div class="welcome-deco">⚔️🛡️🌟</div>
+  <div class="welcome-title">语文学习大冒险</div>
+  <div class="welcome-subtitle" id="welcome-grade-info">勇者征途</div>
+  <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;align-items:center;">
+    <button class="btn btn-primary" onclick="startNewGame()">🗡️ 开始新征途</button>
+    <button class="btn btn-secondary" id="continue-btn" style="display:none;" onclick="continueGame()">⚡ 继续征途</button>
+    <button class="btn btn-small btn-secondary" id="change-grade-btn" style="display:none;" onclick="showScreen('grade')">📚 更换年级</button>
+  </div>
+</div>
+
+<!-- ===== 年级选择页 ===== -->
+<div id="grade-screen" class="screen">
+  <div class="welcome-deco">📚</div>
+  <div class="welcome-title" style="font-size:clamp(24px,5vw,36px);">选择年级和教材</div>
+  <div class="grade-section">
+    <div class="grade-section-title">年级学期</div>
+    <div class="grade-grid" id="grade-grid"></div>
+  </div>
+  <div class="grade-section">
+    <div class="grade-section-title">教材版本</div>
+    <div class="grade-grid" id="textbook-grid"></div>
+  </div>
+  <div class="grade-avail" id="grade-avail"></div>
+  <button class="btn btn-primary btn-disabled" id="grade-confirm-btn" onclick="confirmGrade()">⚡ 确认选择</button>
+</div>
+
+<!-- ===== 领养页 ===== -->
+<div id="adopt-screen" class="screen">
+  <div class="adopt-title">⚡ 召唤你的战斗伙伴</div>
+  <div class="pet-choices">
+    <div class="pet-card" onclick="selectPetType('lion')" data-pet="lion">
+      <div class="pet-emoji">🦁</div>
+      <div class="pet-type-name">烈焰狮王</div>
+      <div class="pet-type-desc">力量型 · 答题加成更多金币</div>
+    </div>
+    <div class="pet-card" onclick="selectPetType('wolf')" data-pet="wolf">
+      <div class="pet-emoji">🐺</div>
+      <div class="pet-type-name">暗影战狼</div>
+      <div class="pet-type-desc">速度型 · 成长速度更快</div>
+    </div>
+    <div class="pet-card" onclick="selectPetType('eagle')" data-pet="eagle">
+      <div class="pet-emoji">🦅</div>
+      <div class="pet-type-name">苍穹神鹰</div>
+      <div class="pet-type-desc">智慧型 · 默契度提升更快</div>
+    </div>
+  </div>
+  <div class="name-input-wrap">
+    <div style="font-size:16px;color:#00D4FF;margin-bottom:8px;font-weight:600;">为你的伙伴命名：</div>
+    <input type="text" id="pet-name-input" placeholder="输入名字..." maxlength="6">
+    <div class="quick-names">
+      <span class="quick-name" onclick="setQuickName('雷霆')">雷霆</span>
+      <span class="quick-name" onclick="setQuickName('烈风')">烈风</span>
+      <span class="quick-name" onclick="setQuickName('破晓')">破晓</span>
+      <span class="quick-name" onclick="setQuickName('星辰')">星辰</span>
+      <span class="quick-name" onclick="setQuickName('战神')">战神</span>
+    </div>
+  </div>
+  <button class="btn btn-primary btn-disabled" id="adopt-confirm-btn" onclick="confirmAdopt()">⚡ 出发！</button>
+</div>
+
+<!-- ===== 地图页 ===== -->
+<div id="map-screen" class="screen">
+  <div class="map-header">
+    <div class="map-stats">
+      <span id="map-user" style="color:#00D4FF;font-size:12px;cursor:pointer;background:rgba(255,255,255,.08);padding:4px 10px;border-radius:10px;" onclick="openUserPanel()" title="点击查看个人信息">👤 <span id="map-user-name"></span> ⚙️</span>
+      <span style="color:#FFD700;">⭐ <span id="map-stars">0</span></span>
+      <span style="color:#00D4FF;">💰 <span id="map-points">0</span></span>
+      <span style="color:#FF6B35;">🏆 <span id="map-ach">0</span></span>
+    </div>
+    <div class="map-header-btns">
+      <button class="btn btn-small btn-secondary" onclick="showScreen('report')">📊 战绩</button>
+      <button class="btn btn-small" style="background:linear-gradient(135deg,#FF6348,#FFA502);color:#fff;" onclick="showScreen('training')">🎯 训练</button>
+      <button class="btn btn-small btn-shop" onclick="showScreen('shop')">⚔️ 补给</button>
+      <button class="btn btn-small" style="background:linear-gradient(135deg,#00D4FF,#0099CC);color:#1A1A2E;" onclick="showScreen('pet')">🏕️ 伙伴基地</button>
+      <button class="btn btn-small" style="background:linear-gradient(135deg,#FF4757,#FF6348);color:#fff;" onclick="showScreen('upload')">📷 错题</button>
+      <button class="btn btn-small" style="background:linear-gradient(135deg,#9B59B6,#8E44AD);color:#fff;" onclick="showScreen('textbook')">📚 教材</button>
+      <button class="btn btn-small" style="background:linear-gradient(135deg,#E91E63,#C2185B);color:#fff;" onclick="showScreen('readaloud')">📖 朗读</button>
+      <button class="toggle-btn map-toggle" id="map-sound-toggle" onclick="toggleSound()" title="音效">🔊</button>
+      <button class="toggle-btn map-toggle" id="map-tts-toggle" onclick="toggleTTS()" title="语音">🗣️</button>
+    </div>
+  </div>
+  <div class="map-body" id="map-body"></div>
+</div>
+
+<!-- ===== 答题页 ===== -->
+<div id="quiz-screen" class="screen">
+  <div class="quiz-header">
+    <button class="btn btn-small btn-secondary" onclick="exitQuiz()">← 返回</button>
+    <div class="quiz-progress" id="quiz-progress"></div>
+    <div class="quiz-level-name" id="quiz-level-name"></div>
+  </div>
+  <div class="quiz-card">
+    <div class="quiz-q-num" id="quiz-q-num"></div>
+    <div class="quiz-q-text" id="quiz-q-text"></div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-small btn-secondary" onclick="speakQuestion()" title="朗读题目">🔊 朗读</button>
+      <button class="hint-btn" id="hint-btn" onclick="useHint()" title="消耗15积分消除2个错误选项">💡 提示 (15💰)</button>
+      <div id="quiz-combo" style="margin-left:auto;"></div>
+    </div>
+    <div class="quiz-options" id="quiz-options"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+    <div class="quiz-bonus" id="quiz-bonus"></div>
+    <button class="btn btn-primary quiz-next-btn" id="quiz-next-btn" style="display:none;" onclick="nextQuestion()">下一题 →</button>
+  </div>
+</div>
+
+<!-- ===== 关卡完成页 ===== -->
+<div id="result-screen" class="screen">
+  <div class="result-stars" id="result-stars"></div>
+  <div class="result-title" id="result-title"></div>
+  <div class="result-detail" id="result-detail"></div>
+  <div class="result-reward" id="result-reward"></div>
+  <div class="result-btns">
+    <button class="btn btn-secondary" onclick="showScreen('map')">🗺️ 返回地图</button>
+    <button class="btn btn-primary" id="result-next-btn" onclick="playNextLevel()">下一关 →</button>
+  </div>
+</div>
+
+<!-- ===== 伙伴基地 ===== -->
+<div id="pet-screen" class="screen">
+  <button class="btn btn-small btn-secondary" onclick="showScreen('map')" style="align-self:flex-start;">← 返回地图</button>
+  <div class="pet-house-title">🏕️ 伙伴基地</div>
+  <div class="pet-display" id="pet-display"></div>
+  <div class="pet-stats-grid" id="pet-stats-grid"></div>
+  <div class="pet-action-btns" id="pet-action-btns"></div>
+  <div style="font-size:14px;color:#FFD700;font-weight:600;margin-top:4px;">已装备</div>
+  <div class="pet-deco-list" id="pet-deco-list"></div>
+</div>
+
+<!-- ===== 补给站 ===== -->
+<div id="shop-screen" class="screen">
+  <div style="width:100%;display:flex;align-items:center;justify-content:space-between;max-width:600px;">
+    <button class="btn btn-small btn-secondary" onclick="showScreen('map')">← 返回</button>
+    <div class="shop-title">⚔️ 补给站</div>
+    <div class="shop-points">💰 <span id="shop-points">0</span></div>
+  </div>
+  <div class="shop-tabs" id="shop-tabs"></div>
+  <div class="shop-grid" id="shop-grid"></div>
+</div>
+
+<!-- ===== 战绩报告 ===== -->
+<div id="report-screen" class="screen">
+  <button class="btn btn-small btn-secondary" onclick="showScreen('map')" style="align-self:flex-start;">← 返回地图</button>
+  <div class="report-title">📊 战绩报告</div>
+  <div class="report-cards" id="report-cards"></div>
+  <div class="report-section" id="report-accuracy"></div>
+  <div class="report-encourage" id="report-encourage"></div>
+  <div class="report-section" id="report-ach-section" style="margin-top:12px;"></div>
+  <div style="margin-top:10px;"><button class="btn btn-primary" onclick="showScreen('training')">🎯 针对性训练</button></div>
+</div>
+
+<!-- ===== 针对性训练页 ===== -->
+<div id="training-screen" class="screen" style="padding:20px;gap:12px;">
+  <button class="btn btn-small btn-secondary" onclick="showScreen('report')" style="align-self:flex-start;">← 返回战绩</button>
+  <div class="welcome-title" style="font-size:clamp(22px,4vw,30px);">🎯 针对性训练</div>
+  <div style="font-size:13px;color:#8892B0;max-width:500px;text-align:center;">根据你的战绩数据，智能分析薄弱环节，生成针对性训练题目</div>
+  <div id="training-content" style="width:100%;max-width:500px;"></div>
+</div>
+
+<!-- ===== 教材管理页 ===== -->
+<div id="textbook-screen" class="screen" style="padding:20px;gap:0;">
+  <div class="tb-mgr-header">
+    <button class="btn btn-small btn-secondary" onclick="showScreen('map')" style="min-width:auto;">← 返回</button>
+    <h2>📚 教材管理</h2>
+  </div>
+  <div style="font-size:12px;color:#8892B0;margin-bottom:12px;">管理各年级教材题库，支持导入JSON或MD格式的题库文件</div>
+  <div class="tb-filter" id="tb-filter"></div>
+  <div class="tb-grid" id="tb-grid"></div>
+  <input type="file" id="tb-import-file" accept=".json,.md" style="display:none;" onchange="handleTbImport(event)">
+</div>
+
+<!-- ===== 朗读模块 ===== -->
+<div id="readaloud-screen" class="screen read-aloud-screen">
+  <div id="ra-list-view">
+    <div class="ra-header">
+      <button class="btn btn-small btn-secondary" onclick="showScreen('map')" style="min-width:auto;">← 返回</button>
+      <h2>📖 朗读训练</h2>
+    </div>
+    <div id="ra-daily-banner"></div>
+    <div id="ra-text-list" class="ra-text-list"></div>
+    <div class="ra-add-text" onclick="document.getElementById('ra-import-file').click()">
+      <div style="font-size:28px;margin-bottom:6px;">📄</div>
+      <div style="color:#8892B0;font-size:13px;">添加课文（支持 .txt 文件）</div>
+    </div>
+    <input type="file" id="ra-import-file" accept=".txt" style="display:none;" onchange="handleRaImport(event)">
+  </div>
+  <div id="ra-reader-view" style="display:none;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <button class="btn btn-small btn-secondary" onclick="exitRaReader()" style="min-width:auto;">← 返回列表</button>
+      <span style="color:#8892B0;font-size:12px;" id="ra-progress-text"></span>
+    </div>
+    <div class="ra-reader">
+      <div class="ra-reader-title" id="ra-reader-title"></div>
+      <div class="ra-reader-author" id="ra-reader-author"></div>
+      <div class="ra-text-body" id="ra-text-body"></div>
+      <div class="ra-controls">
+        <button class="ra-btn ra-btn-listen" onclick="raListenSentence()">🔊 听范读</button>
+        <button class="ra-btn ra-btn-record" id="ra-record-btn" onclick="raToggleRecord()">🎙️ 开始朗读</button>
+        <button class="ra-btn ra-btn-next" onclick="raNextSentence()">下一句 →</button>
+      </div>
+      <div id="ra-recognition-text" style="min-height:40px;background:rgba(255,255,255,.05);border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:14px;color:#C0C0C0;text-align:center;"></div>
+      <div id="ra-result-panel" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 试卷上传页 ===== -->
+<div id="upload-screen" class="screen">
+  <button class="btn btn-small btn-secondary" onclick="showScreen('map')" style="align-self:flex-start;">← 返回地图</button>
+  <div class="welcome-title" style="font-size:clamp(22px,4vw,32px);">📷 试卷错题特训</div>
+  <div style="font-size:14px;color:#8892B0;max-width:500px;text-align:center;">上传考试试卷图片，选择答错的题目类型，系统将生成同类型专项训练关卡</div>
+  <div class="upload-zone" id="upload-zone" onclick="document.getElementById('upload-file').click()">
+    <div class="upload-icon">📤</div>
+    <div style="color:#E8E8F0;font-weight:600;">点击或拖拽上传试卷图片</div>
+    <div class="upload-hint">支持 JPG / PNG 格式</div>
+    <input type="file" id="upload-file" accept="image/*" style="display:none;" onchange="handleUpload(this.files[0])">
+  </div>
+  <div class="upload-preview" id="upload-preview">
+    <div style="position:relative;display:inline-block;width:100%;">
+      <img id="upload-img" style="width:100%;border-radius:12px;border:2px solid rgba(255,255,255,.1);">
+      <button onclick="removeUploadImage()" style="position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,71,87,.9);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4);" title="删除图片">✕</button>
+    </div>
+    <div id="upload-analyze" style="margin-top:10px;"></div>
+  </div>
+  <div style="font-size:16px;font-weight:700;color:#FFD700;">选择你答错的题目类型和数量：</div>
+  <div class="wrong-type-grid" id="wrong-type-grid"></div>
+  <button class="btn btn-primary" onclick="generatePractice()">⚔️ 生成特训关卡</button>
+</div>
+
+<!-- ===== 浮动宠物 ===== -->
+<div class="floating-pet hidden" id="floating-pet" onclick="togglePetMenu()"></div>
+<div class="pet-menu" id="pet-menu">
+  <div class="pet-menu-item" onclick="showScreen('pet')">🏕️ 伙伴基地</div>
+  <div class="pet-menu-item" onclick="showScreen('shop')">⚔️ 去补给</div>
+  <div class="pet-menu-item" onclick="petSpeak()">💬 战术交流</div>
+  <div style="border-top:1px solid rgba(255,255,255,.1);margin:4px 0;"></div>
+  <div class="pet-menu-item" onclick="showScreen('welcome')">🏠 回到主页</div>
+  <div class="pet-menu-item" style="color:#FF4757;" onclick="doLogout()">🚪 退出登录</div>
+</div>
+<div class="streak-banner" id="streak-banner"></div>
+<div class="treasure-overlay" id="treasure-overlay"><div class="treasure-box" id="treasure-box"></div></div>
+<div class="levelup-overlay" id="levelup-overlay"><div class="levelup-box" id="levelup-box"></div></div>
+<div class="settings-toggle" id="settings-toggle" style="display:none;">
+  <button class="toggle-btn" id="sound-toggle" onclick="toggleSound()">🔊</button>
+  <button class="toggle-btn" id="tts-toggle" onclick="toggleTTS()">🗣️</button>
+</div>
+<div class="toast" id="toast-el"></div>
+<div id="user-panel-overlay" class="user-panel-overlay" style="display:none;" onclick="if(event.target===this)closeUserPanel();">
+  <div class="user-panel">
+    <h3>👤 个人中心</h3>
+    <div class="user-panel-section">
+      <div class="up-label">用户名</div>
+      <div class="up-value" id="up-username"></div>
+    </div>
+    <div class="user-panel-section">
+      <div class="up-label">年级</div>
+      <select class="user-panel-input" id="up-grade" onchange="saveGradeTextbook()"></select>
+    </div>
+    <div class="user-panel-section">
+      <div class="up-label">教材版本</div>
+      <select class="user-panel-input" id="up-textbook" onchange="saveGradeTextbook()"></select>
+    </div>
+    <div class="user-panel-section" style="background:none;padding:0;margin-bottom:0;">
+      <div class="up-label" style="margin-bottom:8px;font-size:13px;color:#aaa;">修改密码</div>
+      <input class="user-panel-input" id="up-old-pass" type="password" placeholder="当前密码" autocomplete="off">
+      <input class="user-panel-input" id="up-new-pass" type="password" placeholder="新密码（至少3位）" autocomplete="off">
+      <input class="user-panel-input" id="up-new-pass2" type="password" placeholder="确认新密码" autocomplete="off">
+      <div class="up-msg" id="up-pwd-msg"></div>
+      <button class="user-panel-btn up-btn-save" onclick="changePassword()">🔑 确认修改密码</button>
+    </div>
+    <button class="user-panel-btn up-btn-logout" onclick="closeUserPanel();doLogout();">🚪 退出登录</button>
+    <button class="user-panel-btn up-btn-close" onclick="closeUserPanel()">关闭</button>
+  </div>
+</div>
+<div id="ach-popup" style="display:none;"></div>
+<div class="break-overlay" id="break-overlay">
+  <div class="break-box">
+    <div style="font-size:48px;margin-bottom:12px;">☕</div>
+    <h2 style="color:#00D4FF;margin-bottom:8px;">休息一下吧！</h2>
+    <p style="color:#8892B0;font-size:14px;line-height:1.6;" id="break-msg"></p>
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;">
+      <button class="btn btn-primary btn-small" onclick="dismissBreak(true)">休息好了！</button>
+      <button class="btn btn-secondary btn-small" onclick="dismissBreak(false)">再学5分钟</button>
+    </div>
+  </div>
+</div>
+<div id="encourage-bubble" class="encourage-bubble" style="display:none;"></div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

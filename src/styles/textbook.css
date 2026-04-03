@@ -1,0 +1,27 @@
+/* 教材管理 */
+.tb-mgr-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.tb-mgr-header h2{color:#00D4FF;margin:0;font-size:18px;flex:1;}
+.tb-grid{display:grid;grid-template-columns:1fr;gap:10px;max-height:calc(100vh - 200px);overflow-y:auto;padding-bottom:20px;}
+.tb-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;transition:all .2s;}
+.tb-card:hover{background:rgba(255,255,255,.08);}
+.tb-card .tb-icon{font-size:28px;width:40px;text-align:center;flex-shrink:0;}
+.tb-card .tb-info{flex:1;min-width:0;}
+.tb-card .tb-name{color:#E0E0E0;font-size:14px;font-weight:bold;}
+.tb-card .tb-meta{color:#8892B0;font-size:11px;margin-top:2px;}
+.tb-card .tb-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;}
+.tb-badge{display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:bold;}
+.tb-badge.builtin{background:rgba(0,212,255,.15);color:#00D4FF;}
+.tb-badge.downloaded{background:rgba(0,230,118,.15);color:#00E676;}
+.tb-badge.none{background:rgba(255,75,87,.1);color:#FF4757;}
+.tb-btn{padding:6px 12px;border:none;border-radius:8px;font-size:12px;cursor:pointer;font-weight:bold;transition:all .15s;}
+.tb-btn:active{transform:scale(.95);}
+.tb-btn-import{background:linear-gradient(135deg,#FFD700,#FFA502);color:#1A1A2E;}
+.tb-btn-del{background:rgba(255,75,87,.15);color:#FF4757;}
+.tb-btn-use{background:linear-gradient(135deg,#00E676,#00C853);color:#1A1A2E;}
+.tb-btn:disabled{opacity:.4;cursor:not-allowed;}
+.tb-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.tb-filter-btn{padding:4px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#8892B0;font-size:12px;cursor:pointer;transition:all .15s;}
+.tb-filter-btn.active{background:rgba(0,212,255,.15);color:#00D4FF;border-color:#00D4FF;}
+.tb-loading{text-align:center;padding:20px;color:#8892B0;font-size:14px;}
+.tb-url-input{width:100%;box-sizing:border-box;padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#E0E0E0;font-size:12px;margin-bottom:8px;outline:none;}
+.tb-url-input:focus{border-color:#00D4FF;}

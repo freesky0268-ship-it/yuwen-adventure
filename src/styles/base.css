@@ -1,0 +1,33 @@
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;font-family:"Microsoft YaHei","PingFang SC",sans-serif;}
+body{background:#1A1A2E;color:#E8E8F0;}
+.screen{display:none;width:100%;height:100%;position:absolute;top:0;left:0;overflow-y:auto;}
+.screen.active{display:flex;flex-direction:column;align-items:center;}
+/* 通用按钮 */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 36px;border-radius:14px;border:none;cursor:pointer;font-size:clamp(16px,2.5vw,20px);font-weight:700;transition:all .2s;user-select:none;min-width:180px;min-height:50px;}
+.btn:active{transform:scale(.95);}
+.btn-primary{background:linear-gradient(135deg,#FF6B35,#FF4500);color:#fff;box-shadow:0 4px 15px rgba(255,107,53,.4);}
+.btn-primary:hover{box-shadow:0 6px 25px rgba(255,107,53,.55);transform:translateY(-2px);}
+.btn-secondary{background:rgba(255,255,255,.08);color:#E8E8F0;border:2px solid rgba(255,255,255,.25);}
+.btn-secondary:hover{background:rgba(255,255,255,.15);border-color:#FF6B35;}
+.btn-small{padding:8px 20px;font-size:14px;min-width:auto;min-height:auto;}
+.btn-shop{background:linear-gradient(135deg,#FFD700,#FFA500);color:#1A1A2E;box-shadow:0 4px 12px rgba(255,215,0,.3);}
+.btn-disabled{opacity:.5;pointer-events:none;filter:grayscale(.5);}
+/* 通用动画 */
+.fade-in{animation:fadeIn .4s;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+/* 滚动条 */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px;}
+/* 响应式 */
+@media(max-width:480px){
+  .pet-choices{flex-direction:column;align-items:center;}
+  .pet-card{width:85%;}
+  .shop-grid{grid-template-columns:repeat(2,1fr);}
+  .report-cards{grid-template-columns:repeat(2,1fr);}
+  .map-node{max-width:100%;}
+  .stat-tooltip{width:200px;font-size:11px;}
+}
